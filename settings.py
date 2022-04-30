@@ -10,12 +10,8 @@ def load_from_envs():
     print('------------')
     for key, value in os.environ.items():
         if key == 'PLUGIN_ENVS':
-            env_list = value.split(',')
-            for env in env_list:
-                k, v = env.split(':')
-                configs['envs'].update({
-                    k: v.lstrip(' ')
-                })
+            for v in value:
+                configs['envs'].update(v)
         elif key.startswith('PLUGIN_'):
             configs.update({
                 key[7:].lower(): value

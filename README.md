@@ -14,7 +14,7 @@
         from_secret: ubuntu_password
       port: 22
       envs:
-        - FOO: BAR  # will lstrip BAR's ' '
+        - FOO: BAR
       scripts:
         - echo $FOO
         - echo `TZ='UTC' date -d @${DRONE_BUILD_FINISHED} +%Y-%m-%d_%H-%M-%S`
