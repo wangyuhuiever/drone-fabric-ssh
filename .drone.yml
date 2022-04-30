@@ -26,21 +26,21 @@ steps:
       - git init && git remote add origin ${DRONE_GIT_SSH_URL} && git pull origin ${DRONE_COMMIT_BRANCH}
       - echo -n 'latest,' > .tags
       - echo -n `date -d @${DRONE_BUILD_FINISHED} +%Y-%m-%d_%H-%M-%S` >> .tags
-#
-#  - name: build
-#    image: plugins/docker
-#    pull: if-not-exists
-#    settings:
-##      registry: registry.cn-hangzhou.aliyuncs.com
-##      repo: registry.cn-hangzhou.aliyuncs.com/wangyuhui/sanic-tailor
-#      repo: yuhuiwang/fabric-ssh
-#      username:
-#        from_secret: hub-username
-#      password:
-#        from_secret: hub-password
-#    when:
-#      branch:
-#      - master
+
+  - name: build
+    image: plugins/docker
+    pull: if-not-exists
+    settings:
+#      registry: registry.cn-hangzhou.aliyuncs.com
+#      repo: registry.cn-hangzhou.aliyuncs.com/wangyuhui/sanic-tailor
+      repo: yuhuiwang/fabric-ssh
+      username:
+        from_secret: hub-username
+      password:
+        from_secret: hub-password
+    when:
+      branch:
+      - master
 
   - name: deploy
     image: yuhuiwang/fabric-ssh
