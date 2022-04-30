@@ -1,5 +1,6 @@
 # Drone Fabric SSH
 
+when I use [appleboy/drone-ssh](https://github.com/appleboy/drone-ssh), I don't know why, when I set environment in drone-ssh envs section, it doesn't affect. so I build this image, integrity with [fabric](https://github.com/fabric/fabric).
 
 ## Usage
 ```yaml
