@@ -25,7 +25,7 @@ steps:
                 [[ -z "$${SSH_PORT}" ]] && [[ -n "$${SSH_HOST}" ]] && ssh-keyscan $${SSH_HOST} >> $HOME/.ssh/known_hosts
       - git init && git remote add origin ${DRONE_GIT_SSH_URL} && git pull origin ${DRONE_COMMIT_BRANCH}
       - echo -n 'latest,' > .tags
-      - echo -n `date -d @${DRONE_BUILD_FINISHED} +%Y-%m-%d-%H-%M-%S` >> .tags
+      - echo -n `date -d @${DRONE_BUILD_FINISHED} +%Y-%m-%d_%H-%M-%S` >> .tags
 
   - name: build
     image: plugins/docker
@@ -44,7 +44,7 @@ steps:
 
   - name: deploy
     image: yuhuiwang/fabric-ssh
-    pull: if-not-exists
+    pull: always
     settings:
       host: 192.168.7.63
       username:
@@ -56,7 +56,7 @@ steps:
         - FOO: BAR
       scripts:
         - echo $FOO
-        - echo `TZ='UTC' date -d @${DRONE_BUILD_FINISHED} +%Y-%m-%d-%H-%M-%S`
+        - echo `TZ='UTC' date -d @${DRONE_BUILD_FINISHED} +%Y-%m-%d_%H-%M-%S`
     when:
       branch:
         - master
