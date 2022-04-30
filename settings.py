@@ -10,6 +10,7 @@ def load_from_envs():
     print('------------')
     for key, value in os.environ.items():
         if key == 'PLUGIN_ENVS':
+            print(value)
             for v in value:
                 configs['envs'].update(v)
         elif key.startswith('PLUGIN_'):
